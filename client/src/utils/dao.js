@@ -9,9 +9,17 @@ const Api = {
   saveData: function (object, data) {
     return axios({
       method: "post",
-      url: `${HOST}/api/${object}/new`,
+      url: `${HOST}/api/${object}`,
       headers: {},
       data: data
+    })
+  },
+  deleteData: function (object, id) {
+    return axios({
+      method: "delete",
+      url: `${HOST}/api/${object}/${id}`,
+      headers: {},
+      data: { id: id }
     })
   }
 }

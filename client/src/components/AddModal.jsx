@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { map } from "lodash"
+import { map, isEmpty } from "lodash"
 import { Button } from "react-bootstrap"
 import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
@@ -12,23 +12,31 @@ export function AddModal(props) {
   const [customer, setCustomer] = useState("")
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
+    event.preventDefault()
+    event.stopPropagation()
 
+    const form = event.currentTarget
+    if (form.checkValidity()) {
+      props.onSaveModal({ name, group, customer })
+    }
     setValidated(true)
-    props.onSaveModal({ name, group, customer })
+  }
+
+  const handleClose = () => {
+    setName("")
+    setGroup("")
+    setCustomer("")
+    setValidated(false)
+    props.onCloseModal()
   }
 
   return (
-    <Modal show={props.showModalNew}>
-      <Modal.Header>
-        <Modal.Title>{props.title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Modal centered show={props.showModalNew} onHide={handleClose}>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Modal.Header>
+          <Modal.Title>{props.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -45,7 +53,7 @@ export function AddModal(props) {
           <Form.Group className="mb-3">
             <Form.Label>CustomerID</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               required
               maxLength={50}
               value={customer}
@@ -71,20 +79,23 @@ export function AddModal(props) {
               ))}
             </Form.Select>
           )}
-        </Form>
-        <Form.Group className="mt-5">
-          {props.error !== "" && <Alert variant="danger">{props.error}</Alert>}
-        </Form.Group>
-      </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="secondary" onClick={props.onCloseModal}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleSubmit}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
+          <Form.Group className="mt-5">
+            {!isEmpty(props.alert) && (
+              <Alert variant={props.alert.type}>{props.alert.message}</Alert>
+            )}
+          </Form.Group>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" type="submit">
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>
   )
 }

@@ -15,22 +15,23 @@ DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `customer_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `dealer_id` int NOT NULL,
+  `dealer_id` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`customer_id`),
   KEY `dealer_id` (`dealer_id`),
-  CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`dealer_id`) REFERENCES `dealer` (`dealer_id`)
+  CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`dealer_id`) REFERENCES `dealer` (`dealer_id`) ON DELETE SET DEFAULT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (1, 'Mr. Keyon Upton III', 3);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (2, 'Dr. Art Cole DDS', 1);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (3, 'Douglas Weissnat', 2);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (4, 'Wilton Wisozk MD', 3);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (5, 'Andrew Graham', 3);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (6, 'Kathryne Parisian III', 2);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (7, 'Georgiana Reinger', 3);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (8, 'Ida OKeefe', 5);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (9, 'Doyle Strosin', 4);
-INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES (10, 'Emelie Hand MD', 3);
+INSERT INTO `customer` (`customer_id`, `name`, `dealer_id`) VALUES
+(1,	'Mr. Keyon Upton III',	3),
+(2,	'Dr. Art Cole DDS',	1),
+(3,	'Douglas Weissnat',	2),
+(4,	'Wilton Wisozk MD',	3),
+(5,	'Andrew Graham',	3),
+(6,	'Kathryne Parisian III',	2),
+(7,	'Georgiana Reinger',	3),
+(8,	'Ida OKeefe',	5),
+(9,	'Doyle Strosin',	4),
+(10,	'Emelie Hand MD',	3);
 
 DROP TABLE IF EXISTS `dealer`;
 CREATE TABLE `dealer` (
@@ -76,7 +77,7 @@ CREATE TABLE `vehicle_data` (
   `created` datetime NOT NULL,
   `data` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   KEY `vehicle_id` (`vehicle_id`),
-  CONSTRAINT `vehicle_data_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`)
+  CONSTRAINT `vehicle_data_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `vehicle_data` (`vehicle_id`, `created`, `data`) VALUES (1, '1970-11-16 17:00:31', 'Sit eligendi fuga dicta dolor amet magnam.');
