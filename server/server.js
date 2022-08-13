@@ -25,6 +25,13 @@ app.get("/vehicles", (req, res) => {
     })
 })
 
+app.get("/vehicles/groups", (req, res) => {
+    const SelectQuery = `SELECT * from vehicle_group`;
+    db.query(SelectQuery, (err, result) => {
+      res.send(result)
+    })
+})
+
 app.get("/dealers", (req, res) => {
     const SelectQuery = "SELECT * FROM dealer";
     db.query(SelectQuery, (err, result) => {
