@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react"
-import API from "../utils/dao"
+import React, { useState } from "react"
 import { map } from "lodash"
 import { Button } from "react-bootstrap"
 import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
+import Alert from "react-bootstrap/Alert"
 
 export function AddModal(props) {
   const [validated, setValidated] = useState(false)
+  const [name, setName] = useState("")
+  const [group, setGroup] = useState("")
+  const [customer, setCustomer] = useState("")
 
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -16,7 +19,7 @@ export function AddModal(props) {
     }
 
     setValidated(true)
-    props.onSaveModal()
+    props.onSaveModal({ name, group, customer })
   }
 
   return (
@@ -26,25 +29,40 @@ export function AddModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          {props.formInputs !== false &&
-            map(props.formInputs, (el) => {
-              return (
-                <Form.Group
-                  key={el.label}
-                  className="mb-3"
-                  controlId="formBasicEmail"
-                >
-                  <Form.Label>{el.label}</Form.Label>
-                  <Form.Control
-                    type={el.type}
-                    required={el.required}
-                    maxlength={el.maxLength}
-                  />
-                </Form.Group>
-              )
-            })}
+          <Form.Group className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              maxLength={50}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value)
+              }}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>CustomerID</Form.Label>
+            <Form.Control
+              type="text"
+              required
+              maxLength={50}
+              value={customer}
+              onChange={(e) => {
+                setCustomer(e.target.value)
+              }}
+            />
+          </Form.Group>
+
           {props.dropDown !== false && (
-            <Form.Select required>
+            <Form.Select
+              required
+              value={group}
+              onChange={(e) => {
+                setGroup(e.target.value)
+              }}
+            >
               <option value="">{props.dropDown.label}</option>
               {map(props.dropDown.data, (group) => (
                 <option key={group.vehicleId} value={group.vehicleId}>
@@ -54,7 +72,11 @@ export function AddModal(props) {
             </Form.Select>
           )}
         </Form>
+        <Form.Group className="mt-5">
+          {props.error !== "" && <Alert variant="danger">{props.error}</Alert>}
+        </Form.Group>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={props.onCloseModal}>
           Close

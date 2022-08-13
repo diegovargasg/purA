@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import API from "../utils/dao"
 import Table from "react-bootstrap/Table"
-import { map } from "lodash"
+import { map, get } from "lodash"
 import { Button } from "react-bootstrap"
 import { AddModal } from "./AddModal"
 
@@ -9,10 +9,7 @@ export function Vehicles(props) {
   const [vehicles, setvehicles] = useState([])
   const [showModalNew, setShowModalNew] = useState(false)
   const [vehicleGroup, setVehicleGroup] = useState([])
-
-  const newVehicleFields = [
-    { label: "Group name", type: "text", required: true, maxLength: 50 }
-  ]
+  const [error, setError] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +37,15 @@ export function Vehicles(props) {
     setShowModalNew(false)
   }
 
-  async function saveModal() {
-    API.fetchData("vehicles")
+  async function saveModal(data) {
+    try{
+      const response = await API.saveData("vehicles", data)
+      console.log(response);
+    } catch(e) {
+      const validationError = get(e, 'response.data.errors.0.msg', "");
+      const ServerError = get(e, 'response.data.message', "");
+      setError(`${validationError}${ServerError}`);
+    }
   }
 
   return (
@@ -99,7 +103,7 @@ export function Vehicles(props) {
         onCloseModal={closeModal}
         onSaveModal={saveModal}
         dropDown={{ label: "Select a Group", data: vehicleGroup }}
-        formInputs={newVehicleFields}
+        error={error}
       />
     </div>
   )
