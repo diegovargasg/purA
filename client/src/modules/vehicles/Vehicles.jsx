@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import API from "../utils/dao"
+import API from "../../utils/dao"
 import Table from "react-bootstrap/Table"
 import { map, get } from "lodash"
 import { Button } from "react-bootstrap"

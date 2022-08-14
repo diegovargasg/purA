@@ -1,9 +1,9 @@
 import "./App.css"
 import { Routes, Route, Link } from "react-router-dom"
-import { Dealers } from "./components/Dealers"
-import { Home } from "./components/Home"
-import { Vehicles } from "./components/Vehicles"
-import { Customers } from "./components/Customers"
+import { Dealers } from "./modules/dealers/Dealers"
+import { Home } from "./modules/home/Home"
+import { Vehicles } from "./modules/vehicles/Vehicles"
+import { Customers } from "./modules/customers/Customers"
 
 function App() {
   return (
