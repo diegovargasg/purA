@@ -4,10 +4,13 @@ import Table from "react-bootstrap/Table"
 import { map, get } from "lodash"
 import { Button } from "react-bootstrap"
 import { AddModal } from "./AddModal"
+import { ViewModal } from "./ViewModal"
 
 export function Vehicles(props) {
   const [vehicles, setvehicles] = useState([])
+  const [vehicleInfo, setVehicleInfo] = useState({})
   const [showModalNew, setShowModalNew] = useState(false)
+  const [showModalView, setShowModalView] = useState(false)
   const [vehicleGroup, setVehicleGroup] = useState([])
   const [alert, setAlert] = useState({})
 
@@ -69,6 +72,9 @@ export function Vehicles(props) {
     try {
       const response = await API.fetchData(`vehicles/${id}`)
       if (response.status === 200) {
+        console.log(response)
+        setShowModalView(true)
+        setVehicleInfo(...response.data)
         fetchData().catch(console.error)
       }
     } catch (e) {
@@ -76,6 +82,11 @@ export function Vehicles(props) {
       const ServerError = get(e, "response.data.message", "")
       // setAlert({ message: `${validationError}${ServerError}`, type: "danger" })
     }
+  }
+
+  function closeModalView() {
+    setVehicleInfo(false)
+    setShowModalView(false)
   }
 
   return (
@@ -177,11 +188,17 @@ export function Vehicles(props) {
       </div>
       <AddModal
         title="Add new vehicle"
-        showModalNew={showModalNew}
+        showModal={showModalNew}
         onCloseModal={closeModal}
         onSaveModal={saveModal}
         dropDown={{ label: "Select a Group", data: vehicleGroup }}
         alert={alert}
+      />
+      <ViewModal
+        title="View vehicle"
+        showModal={showModalView}
+        vehicleInfo={vehicleInfo}
+        onCloseModal={closeModalView}
       />
     </div>
   )

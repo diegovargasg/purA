@@ -31,7 +31,7 @@ export function AddModal(props) {
   }
 
   return (
-    <Modal centered show={props.showModalNew} onHide={handleClose}>
+    <Modal centered show={props.showModal} onHide={handleClose}>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Modal.Header>
           <Modal.Title>{props.title}</Modal.Title>
