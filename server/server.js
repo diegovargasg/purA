@@ -25,6 +25,22 @@ app.get("/vehicles", (req, res) => {
   })
 })
 
+app.get(
+  "/vehicles/:id",
+  param("id").not().isEmpty().isInt().trim().escape(),
+  (req, res) => {
+    const SelectQuery = `SELECT vd.vehicle_id, customer_name, n.vehicle_name, vd.data
+    FROM 
+    (SELECT c.name as customer_name, v.vehicle_id, c.customer_id, v.name as vehicle_name
+           FROM customer as c, vehicle as v
+           WHERE v.customer_id = c.customer_id AND v.vehicle_id = ${req.params.id}) as n, vehicle_data as vd
+    WHERE vd.vehicle_id = n.vehicle_id`
+    db.query(SelectQuery, (err, result) => {
+      res.send(result)
+    })
+  }
+)
+
 app.post(
   "/vehicles",
   body("name").not().isEmpty().trim().escape(),

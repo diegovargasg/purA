@@ -60,16 +60,16 @@ CREATE TABLE `vehicle` (
   CONSTRAINT `vehicle_ibfk_2` FOREIGN KEY (`vehicle_group_id`) REFERENCES `vehicle_group` (`vehicle_group_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (1, 'Orland Lakes', 8, 4, '1978-02-26 02:30:09');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (2, 'Vincenzo Drives', 6, 5, '2020-05-22 00:50:43');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (3, 'Dietrich Streets', 7, 4, '2004-07-27 00:10:09');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (4, 'Vanessa Springs', 9, 4, '1982-06-27 06:32:28');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (5, 'Marilyne Shoal', 8, 5, '1980-02-11 15:05:00');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (6, 'Huels Center', 10, 2, '2021-01-15 16:04:58');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (7, 'Cristal Fort', 1, 1, '1972-02-04 13:03:27');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (8, 'Lilla Crossroad', 4, 2, '1978-11-28 18:37:27');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (9, 'Ottis Cape', 7, 2, '2019-10-22 12:22:37');
-INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (10, 'Chesley Light', 4, 1, '1998-03-30 09:24:46');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (1, 'Lakes', 8, 4, '1978-02-26 02:30:09');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (2, 'Drives', 6, 5, '2020-05-22 00:50:43');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (3, 'Streets', 7, 4, '2004-07-27 00:10:09');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (4, 'Springs', 9, 4, '1982-06-27 06:32:28');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (5, 'Shoal', 8, 5, '1980-02-11 15:05:00');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (6, 'Center', 10, 2, '2021-01-15 16:04:58');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (7, 'Fort', 1, 1, '1972-02-04 13:03:27');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (8, 'Crossroad', 4, 2, '1978-11-28 18:37:27');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (9, 'Cape', 7, 2, '2019-10-22 12:22:37');
+INSERT INTO `vehicle` (`vehicle_id`, `name`, `customer_id`, `vehicle_group_id`, `created`) VALUES (10, 'Light', 4, 1, '1998-03-30 09:24:46');
 
 DROP TABLE IF EXISTS `vehicle_data`;
 CREATE TABLE `vehicle_data` (
