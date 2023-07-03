@@ -29,9 +29,9 @@ export function Home() {
                 <FontAwesomeIcon icon={faUser} className="icon" />
               </div>
               <Card.Body>
-                <Card.Title>Users Administration</Card.Title>
+                <Card.Title>Customers Administration</Card.Title>
                 <Card.Text>Some quick example text to build on the card title and make up the bulk of the card's content.</Card.Text>
-                <Link className="btn btn-primary" to="users">
+                <Link className="btn btn-primary" to="customers">
                   Users
                 </Link>
               </Card.Body>
